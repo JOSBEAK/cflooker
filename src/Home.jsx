@@ -6,7 +6,6 @@ function Home() {
   const { userData } = useContext(VizContext);
 
   const renderedItems = userData.map((user, index) => {
-    console.log(index);
     return (
       <UserShow
         avatar={user.avatar}
