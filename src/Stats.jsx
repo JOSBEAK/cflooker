@@ -5,8 +5,9 @@ import ProblemInfo from "./ProblemInfo";
 import ContestInfo from "./ContestInfo";
 import LineGraph from "./LineGraph";
 import { useEffect, useState } from "react";
+import WorldMap from "./Maps";
 
-function Stats({ stats, handle }) {
+function Stats({ stats, handle, userDetails }) {
   let solvedList = {}; ///[name][attempt_count]
   let tagList = {}; //[tag][count]
   let acceptedCount = 0;
@@ -99,25 +100,63 @@ function Stats({ stats, handle }) {
 
       {/* Question Tags Graph (replace with your actual graph component) */}
       <div className="flex ">
-        <span className="pr-1">
-          {" "}
-          <div className="mb-4 rounded-md shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] text-slate-100 bg-gradient-to-br from-gray-800 to-gray-900">
-            <h3 className="mb-2 text-lg font-semibold">Tags</h3>
-            {/* Your graph component goes here */}
-            <PieGraph chartData={tagList} />
-          </div>
-        </span>
+        <div className="mb-4 rounded-md shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] text-slate-100 bg-gradient-to-br from-gray-800 to-gray-900">
+          <h3 className="mb-2 text-lg font-semibold">Rating Graph</h3>
+          {/* Your graph component goes here */}
+          <BarGraph chartData={ratingList} width={500} height={700} />
+        </div>
+        <div>
+          <div className="flex">
+            <span className="pr-1">
+              {" "}
+              <div className="mb-4 rounded-md shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] text-slate-100 bg-gradient-to-br from-gray-800 to-gray-900">
+                <h3 className="mb-2 text-lg font-semibold">Tags</h3>
+                {/* Your graph component goes here */}
+                <PieGraph chartData={tagList} />
+              </div>
+            </span>
 
-        <span className="pl-1">
-          <div className="mb-4 rounded-md shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] text-slate-100 bg-gradient-to-br from-gray-800 to-gray-900">
-            <h3 className="mb-2 text-lg font-semibold">Tags</h3>
-            {/* Your graph component goes here */}
-            <PieGraph chartData={verdictList} />
+            <span className="pl-1">
+              <div className="mb-4 rounded-md shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] text-slate-100 bg-gradient-to-br from-gray-800 to-gray-900">
+                <h3 className="mb-2 text-lg font-semibold">Tags</h3>
+                {/* Your graph component goes here */}
+                <PieGraph chartData={verdictList} />
+              </div>
+            </span>
           </div>
-        </span>
+          <div className="mb-4 rounded-md shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] text-slate-100 bg-gradient-to-br from-gray-800 to-gray-900">
+            <h3 className="mb-2 text-lg font-semibold">Level Graph</h3>
+            {/* Your graph component goes here */}
+            <BarGraph
+              chartData={levelList}
+              axis="xAxis"
+              width={600}
+              height={500}
+            />
+          </div>
+        </div>
       </div>
 
       {/* Rating Graph (replace with your actual graph component) */}
+
+      {/* Language Graph (replace with your actual graph component) */}
+      <div className="mb-4 rounded-md shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] text-slate-100 bg-gradient-to-br from-gray-800 to-gray-900">
+        <h3 className="mb-2 text-lg font-semibold">Language Graph</h3>
+        {/* Your graph component goes here */}
+        <div>
+          <BarGraph chartData={languageList} width={1000} height={500} />
+        </div>
+      </div>
+      {/* Map  */}
+
+      <div className="mb-4 rounded-md shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] text-slate-100 bg-gradient-to-br from-gray-800 to-gray-900">
+        <h3 className="mb-2 text-lg font-semibold">Map</h3>
+        {/* Your graph component goes here */}
+        <div className="p-6 ">
+          <WorldMap city={userDetails.city} country={userDetails.country} />
+        </div>
+      </div>
+
       <div className="mb-4 rounded-md shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] text-slate-100 bg-gradient-to-br from-gray-800 to-gray-900">
         <h3 className="mb-2 text-lg font-semibold ">Rating Graph</h3>
         {/* Your graph component goes here */}
@@ -125,28 +164,6 @@ function Stats({ stats, handle }) {
           <LineGraph ratingData={ratingData} />
         </span>
       </div>
-
-      {/* Language Graph (replace with your actual graph component) */}
-      <div className="mb-4 rounded-md shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] text-slate-100 bg-gradient-to-br from-gray-800 to-gray-900">
-        <h3 className="mb-2 text-lg font-semibold">Language Graph</h3>
-        {/* Your graph component goes here */}
-        <div>
-          <BarGraph chartData={languageList} />
-        </div>
-      </div>
-      {/* Language Graph (replace with your actual graph component) */}
-      <div className="mb-4 rounded-md shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] text-slate-100 bg-gradient-to-br from-gray-800 to-gray-900">
-        <h3 className="mb-2 text-lg font-semibold">Rating Graph</h3>
-        {/* Your graph component goes here */}
-        <BarGraph chartData={ratingList} />
-      </div>
-      {/* Language Graph (replace with your actual graph component) */}
-      <div className="mb-4 rounded-md shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)] text-slate-100 bg-gradient-to-br from-gray-800 to-gray-900">
-        <h3 className="mb-2 text-lg font-semibold">Level Graph</h3>
-        {/* Your graph component goes here */}
-        <BarGraph chartData={levelList} />
-      </div>
-
       <div className="flex flex-row">
         <div className="mb-4 col-span-full">
           <h3 className="mb-2 text-lg font-semibold">info</h3>

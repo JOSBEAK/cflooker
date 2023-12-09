@@ -23,10 +23,10 @@ function PieGraph({ chartData }) {
       series={[
         {
           data: data,
-          innerRadius: 80,
+          innerRadius: 0,
           outerRadius: 100,
           paddingAngle: 1,
-          cornerRadius: 5,
+          cornerRadius: 2,
           startAngle: -90,
           endAngle: 360,
           cx: 150,

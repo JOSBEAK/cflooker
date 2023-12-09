@@ -32,7 +32,9 @@ const User = () => {
 
   if (userStats) {
     // userStats exists, so you can safely map over it
-    renderedStats = <Stats stats={userStats} handle={handle} />;
+    renderedStats = (
+      <Stats stats={userStats} handle={handle} userDetails={userDetails} />
+    );
   } else {
     // userStats is null, rendering loading or some fallback content
     renderedStats = <p>Loading...</p>;
@@ -59,7 +61,7 @@ const User = () => {
   return (
     <div>
       <div className="flex shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)]">
-        <div className="flex-none w-64 px-10 py-10 h-128">
+        <div className="flex-none w-64 px-10 py-10 ">
           <span className="text-centre">
             <img
               src={userDetails.avatar}
@@ -69,8 +71,9 @@ const User = () => {
             <h2 className="mb-4 text-2xl font-bold">{`@${handle}`}</h2>
           </span>
         </div>
+
         <div className="flex-1">
-          <dl className="grid grid-cols-1 md:grid-cols-4 gap-x-4 gap-y-8 ">
+          <dl className="grid grid-cols-1 md:grid-cols-3 gap-x-4 gap-y-8 ">
             <div className="shadow-[0_2.8px_2.2px_rgba(0,_0,_0,_0.034),_0_6.7px_5.3px_rgba(0,_0,_0,_0.048),_0_12.5px_10px_rgba(0,_0,_0,_0.06),_0_22.3px_17.9px_rgba(0,_0,_0,_0.072),_0_41.8px_33.4px_rgba(0,_0,_0,_0.086),_0_100px_80px_rgba(0,_0,_0,_0.12)]">
               <div className="block p-6 bg-white rounded-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-pink-500 hover:to-yellow-500">
                 <h5 className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
@@ -82,8 +85,7 @@ const User = () => {
                 </p>
               </div>
             </div>
-
-            <div>
+            {/* <div>
               <div className="block p-6 bg-white rounded-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-pink-500 hover:to-yellow-500">
                 <h5 className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
                   Country
@@ -92,9 +94,8 @@ const User = () => {
                   {userDetails.country || "N/A"}
                 </p>
               </div>
-            </div>
-
-            <div>
+            </div> */}
+            {/* <div>
               <div className="block p-6 bg-white rounded-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-pink-500 hover:to-yellow-500">
                 <h5 className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
                   City
@@ -103,7 +104,7 @@ const User = () => {
                   {userDetails.city || "N/A"}
                 </p>
               </div>
-            </div>
+            </div> */}
             <div>
               <div className="block p-6 bg-white rounded-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-pink-500 hover:to-yellow-500">
                 <h5 className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
@@ -114,86 +115,83 @@ const User = () => {
                 </p>
               </div>
             </div>
-
             <div>
               <div className="block p-6 bg-white rounded-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-pink-500 hover:to-yellow-500">
                 <h5 className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
                   Contribution
                 </h5>
                 <p className="mb-4 text-base text-neutral-600 dark:text-pink-400">
-                  {userDetails.contribution || "N/A"}
+                  {userDetails.contribution || "0"}
                 </p>
               </div>
             </div>
             <div>
               <div className="block p-6 bg-white rounded-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-pink-500 hover:to-yellow-500">
-                <h5 className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-                  Rank
+                <h5 className="mb-0 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+                  Current Standings
                 </h5>
-                <p className="mb-4 text-base text-neutral-600 dark:text-pink-400">
+                <p className="mb-0 text-base text-neutral-600 dark:text-pink-400">
                   {userDetails.rank || "N/A"}
                 </p>
-              </div>
-            </div>
-
-            <div>
-              <div className="block p-6 bg-white rounded-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-pink-500 hover:to-yellow-500">
-                <h5 className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-                  Rating
-                </h5>
-                <p className="mb-4 text-base text-neutral-600 dark:text-pink-400">
-                  {userDetails.rating || "N/A"}
-                </p>
+                <p>{userDetails.rating || "N/A"}</p>
               </div>
             </div>
             <div>
               <div className="block p-6 bg-white rounded-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-pink-500 hover:to-yellow-500">
-                <h5 className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-                  Max Rank
+                <h5 className="mb-0 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+                  Max
                 </h5>
-                <p className="mb-4 text-base text-neutral-600 dark:text-pink-400">
+                <p className="mb-0 text-base text-neutral-600 dark:text-pink-400">
                   {userDetails.maxRank || "N/A"}
                 </p>
-              </div>
-            </div>
-
-            <div>
-              <div className="block p-6 bg-white rounded-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-pink-500 hover:to-yellow-500">
-                <h5 className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-                  Max Rating
-                </h5>
-                <p className="mb-4 text-base text-neutral-600 dark:text-pink-400">
+                <p className="mb-0 text-base text-neutral-600 dark:text-pink-400">
                   {userDetails.maxRating || "N/A"}
                 </p>
               </div>
             </div>
-            <div>
-              <div className="block p-6 bg-white rounded-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-pink-500 hover:to-yellow-500">
-                <h5 className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-                  Last Online
-                </h5>
-                <p className="mb-4 text-base text-neutral-600 dark:text-pink-400">
-                  {convertUnixTimeToDateTime(
-                    userDetails.lastOnlineTimeSeconds
-                  ) || "N/A"}
-                </p>
+
+            {/*Carousel navigator */}
+            <div className="w-full carousel">
+              <div id="slide1" className="relative w-full carousel-item">
+                <div className="block p-6 bg-white rounded-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-pink-500 hover:to-yellow-500">
+                  <h5 className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+                    Last Online
+                  </h5>
+                  <p className="mb-4 text-base text-neutral-600 dark:text-pink-400">
+                    {convertUnixTimeToDateTime(
+                      userDetails.lastOnlineTimeSeconds
+                    ) || "N/A"}
+                  </p>
+                </div>
+
+                <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                  <a href="#slide2" className="btn btn-circle">
+                    ❯
+                  </a>
+                </div>
               </div>
-            </div>
-            <div>
-              <div className="block p-6 bg-white rounded-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-pink-500 hover:to-yellow-500">
-                <h5 className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-                  Date Joined
-                </h5>
-                <p className="mb-4 text-base text-neutral-600 dark:text-pink-400">
-                  {convertUnixTimeToDateTime(
-                    userDetails.registrationTimeSeconds
-                  ) || "N/A"}
-                </p>
+              <div id="slide2" className="relative w-full carousel-item">
+                <div className="block p-6 bg-white rounded-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-pink-500 hover:to-yellow-500">
+                  <h5 className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+                    Date Joined
+                  </h5>
+                  <p className="mb-4 text-base text-neutral-600 dark:text-pink-400">
+                    {convertUnixTimeToDateTime(
+                      userDetails.registrationTimeSeconds
+                    ) || "N/A"}
+                  </p>
+                </div>
+
+                <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                  <a href="#slide1" className="btn btn-circle">
+                    ❮
+                  </a>
+                </div>
               </div>
             </div>
           </dl>
 
-          <div className="pt-48 ">{renderedStats}</div>
+          <div className="pt-4 ">{renderedStats}</div>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import { BarChart } from "@mui/x-charts/BarChart";
 import PropTypes from "prop-types";
 
-function BarGraph({ chartData }) {
+function BarGraph({ chartData, axis, width, height }) {
   let fields = [];
   let values = [];
 
@@ -13,30 +13,54 @@ function BarGraph({ chartData }) {
 
   return (
     <div>
-      <BarChart
-        sx={{ marginLeft: "30px" }}
-        yAxis={[
-          {
-            id: "barCategories",
-            data: fields[0] ? fields : ["NAN"],
-            scaleType: "band",
-          },
-        ]}
-        series={[
-          {
-            data: values[0] ? values : [0],
-          },
-        ]}
-        width={500}
-        height={300}
-        layout="horizontal"
-      />
+      {axis === "xAxis" ? (
+        <BarChart
+          margin={{ left: 40 }}
+          xAxis={[
+            {
+              id: "barCategories",
+              data: fields[0] ? fields : ["NAN"],
+              scaleType: "band",
+            },
+          ]}
+          series={[
+            {
+              data: values[0] ? values : [0],
+            },
+          ]}
+          width={width}
+          height={height}
+          layout="vertical"
+        />
+      ) : (
+        <BarChart
+          margin={{ left: width === 1000 ? 120 : 70 }}
+          yAxis={[
+            {
+              id: "barCategories",
+              data: fields[0] ? fields : ["NAN"],
+              scaleType: "band",
+            },
+          ]}
+          series={[
+            {
+              data: values[0] ? values : [0],
+            },
+          ]}
+          width={width}
+          height={height}
+          layout="horizontal"
+        />
+      )}
     </div>
   );
 }
 
 BarGraph.propTypes = {
   chartData: PropTypes.object,
+  axis: PropTypes.string,
+  width: PropTypes.number,
+  height: PropTypes.number,
 };
 
 export default BarGraph;

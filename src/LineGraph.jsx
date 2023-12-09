@@ -25,20 +25,28 @@ function LineGraph({ ratingData }) {
     return (
       <>
         <LineChart
-          width={500}
+          width={1000}
           height={300}
           series={[
-            { data: ratingData.slice(0, itemNb), label: "Contest Rating" },
+            {
+              data: ratingData.slice(0, itemNb),
+              label: "Contest Rating",
+            },
           ]}
-          xAxis={[{ scaleType: "point", data: xLabels.slice(0, itemNb) }]}
-          sx={{ color: "white" }}
+          xAxis={[
+            {
+              scaleType: "point",
+              data: xLabels.slice(0, itemNb),
+            },
+          ]}
         />
         <div className="p-6">
           <Slider
             value={itemNb}
+            min={1}
+            max={ratingData.length}
             onChange={handleItemNbChange}
             valueLabelDisplay="auto"
-            defaultValue={ratingData.length}
             aria-labelledby="input-item-number"
           />
         </div>
